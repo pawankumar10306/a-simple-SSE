@@ -1,0 +1,32 @@
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="index.css" />
+  <title>Jokes SSE</title>
+</head>
+<body>
+  <div class="contain" id="joke-container">
+    <p>Jokes are Lodin........</p>
+  </div>
+
+  <script>
+     const jokeContainer = document.getElementById('joke-container');
+    const eventSource = new EventSource('/sse');
+
+    eventSource.onmessage = function(event) {
+        console.log(event.data);
+      const joke = JSON.parse(event.data);
+      jokeContainer.innerHTML = '<p>' + joke + '</p>';
+    };
+
+    eventSource.onerror = function(error) {
+      console.error('EventSource failed:', error);
+      eventSource.close();
+    };
+  </script>
+ </body>
+</html>
