@@ -14,7 +14,7 @@ app.get("/sse", (req, res) => {
 
   const fetchJoke = async () => {
     try {
-      const response = await fetch('https://v2.jokeapi.dev/joke/Any?blacklistFlags=nsfw&format=txt');
+      const response = await fetch('https://v2.jokeapi.dev/joke/Any?format=txt');
       const joke = await response.text();
     //   console.log(joke);
 
